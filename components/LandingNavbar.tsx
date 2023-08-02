@@ -10,7 +10,7 @@ const poppins = Poppins({
   subsets: ["latin"],
 });
 
-export const landingNavbar = () => {
+export default function landingNavbar  ()  {
   const { isSignedIn } = useAuth();
   return (
     <nav className="p-4 bg-transparent flex items-center justify-between">
