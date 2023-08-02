@@ -197,7 +197,7 @@ export default function ImageGenerationPage() {
                       </FormControl>
                       <SelectContent>
                         {resolutionOptions.map((resolution) => (
-                          <SelectItem value={resolution.value}>
+                          <SelectItem key={resolution.value} value={resolution.value}>
                             {resolution.lable}
                           </SelectItem>
                         ))}
