@@ -13,7 +13,6 @@ import {
   FormControl,
   FormField,
   FormItem,
-  FormLabel,
   FormMessage,
 } from "@/components/ui/form";
 
@@ -23,10 +22,9 @@ import { cn } from "@/lib/utils";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import UserAvatar from "@/components/UserAvatar";
-import { ChatCompletionRequestMessage } from "openai";
 import ReactMarkdown from "react-markdown";
 import { useProModal } from "@/hooks/useProModal";
-import {toast} from "react-hot-toast"
+import { toast } from "react-hot-toast";
 
 const formSchema = z.object({
   prompt: z.string().min(2, { message: "Please write a propmt" }),
@@ -67,8 +65,8 @@ export default function CodePage() {
     } catch (error: any) {
       if (error?.response?.status === 403) {
         proModal.onOpen();
-      }else{
-        toast.error("Something went wrong")
+      } else {
+        toast.error("Something went wrong");
       }
     } finally {
       router.refresh();
