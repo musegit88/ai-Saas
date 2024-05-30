@@ -23,16 +23,12 @@ import { cn } from "@/lib/utils";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import UserAvatar from "@/components/UserAvatar";
-import { ChatCompletionRequestMessage } from "openai";
 import { useProModal } from "@/hooks/useProModal";
-import {toast} from "react-hot-toast"
+import { toast } from "react-hot-toast";
 
 const formSchema = z.object({
   prompt: z.string().min(2, { message: "Please write a propmt" }),
 });
-interface MessageProps {
-  content: string;
-}
 
 export default function ConversationPage() {
   const proModal = useProModal();
@@ -50,10 +46,8 @@ export default function ConversationPage() {
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
-
       const userMessages = { content: values.prompt };
 
-      // const newMessages = [...messages, userMessages];
       const response = await axios.post("/api/conversation", {
         messages: values.prompt,
       });
@@ -67,8 +61,8 @@ export default function ConversationPage() {
     } catch (error: any) {
       if (error?.response?.status === 403) {
         proModal.onOpen();
-      }else{
-        toast.error("Something went wrong")
+      } else {
+        toast.error("Something went wrong");
       }
     } finally {
       router.refresh();
@@ -141,11 +135,11 @@ export default function ConversationPage() {
                 )}
               >
                 {message.content ? (
+                  <UserAvatar />
+                ) : (
                   <h6 className="bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent">
                     Prime
                   </h6>
-                ) : (
-                  <UserAvatar />
                 )}
                 <p className="text-sm">{message.content}</p>
 
