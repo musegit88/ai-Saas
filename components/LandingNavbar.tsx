@@ -1,7 +1,7 @@
 "use client";
 import { Poppins } from "next/font/google";
 import Link from "next/link";
-import { useAuth } from "@clerk/nextjs";
+import { useAuth, UserButton } from "@clerk/nextjs";
 import { cn } from "@/lib/utils";
 import { Button } from "./ui/button";
 
@@ -10,7 +10,7 @@ const poppins = Poppins({
   subsets: ["latin"],
 });
 
-export default function landingNavbar  ()  {
+export default function landingNavbar() {
   const { isSignedIn } = useAuth();
   return (
     <nav className="p-4 bg-transparent flex items-center justify-between">
@@ -27,11 +27,30 @@ export default function landingNavbar  ()  {
         </div>
       </Link>
       <div>
-        <Link href={isSignedIn ? "/dashboard" : "/sign-up"}>
-          <Button variant="outline" className="rounded-full">
-            Get started
-          </Button>
-        </Link>
+        {isSignedIn ? (
+          <div className="flex items-center gap-2">
+            <Link href={"/dashboard"}>
+              <Button variant="outline" className="rounded-full">
+                Dashboard
+              </Button>
+            </Link>
+            <UserButton afterSignOutUrl="/" />
+          </div>
+        ) : (
+          <div className="flex items-center gap-2">
+            <Button asChild size="sm" className="rounded-md">
+              <Link href={"/sign-in"}>Signin</Link>
+            </Button>
+            <Button
+              asChild
+              variant="secondary"
+              size="sm"
+              className="rounded-md"
+            >
+              <Link href={"/sign-up"}>Get started</Link>
+            </Button>
+          </div>
+        )}
       </div>
     </nav>
   );

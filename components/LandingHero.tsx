@@ -4,6 +4,7 @@ import { useAuth } from "@clerk/nextjs";
 import Link from "next/link";
 import TypewriterComponent from "typewriter-effect";
 import { Button } from "./ui/button";
+import { LayoutDashboard, Sparkles } from "lucide-react";
 export default function LandingHero() {
   const { isSignedIn } = useAuth();
   return (
@@ -30,17 +31,32 @@ export default function LandingHero() {
         Create content using AI 10x faster
       </div>
       <div>
-        <Link href={isSignedIn ? "/dashboard" : "/sign-up"}>
-          <Button
-            variant="gradient"
-            className="md:text-lg p-4 md:p-6 rounded-full font-medium"
-          >
-            Try PRIME AI for free
-          </Button>
-        </Link>
-      </div>
-      <div className="text-zinc-400 text-xs md:text-sm font-normal">
-        No credit card required
+        {isSignedIn ? (
+          <Link href={"/dashboard"} className="flex justify-center">
+            <Button
+              variant="gradient"
+              className="flex gap-2 md:text-lg p-4 md:p-6 rounded-full font-medium"
+            >
+              <LayoutDashboard />
+              <p>Dashboard</p>
+            </Button>
+          </Link>
+        ) : (
+          <Link href={"/sign-up"} className="flex justify-center">
+            <Button
+              variant="gradient"
+              className="flex gap-2 md:text-lg p-4 md:p-6 rounded-full font-medium"
+            >
+              <Sparkles />
+              Try PRIME AI for free
+            </Button>
+          </Link>
+        )}
+        {!isSignedIn && (
+          <div className="text-zinc-400 text-xs md:text-sm font-normal mt-1">
+            No credit card required
+          </div>
+        )}
       </div>
     </div>
   );
