@@ -1,4 +1,4 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 
 
 import { auth } from "@clerk/nextjs";
@@ -9,10 +9,9 @@ import { checkSubscription } from "@/lib/subscription"
 
 const replicate = new Replicate({
     auth: process.env.REPLICATE_API_TOKEN!
-    // auth: process.env.REPLICATE_API_TOKEN! || ""
 })
 
-export async function POST(req: Request) {
+export async function POST(req: NextRequest) {
 
     try {
         const { userId } = auth();
@@ -46,7 +45,6 @@ export async function POST(req: Request) {
         if (!isPro) {
             await increaseApiLimit()
         }
-        // console.log(response)
         return NextResponse.json(response)
 
     } catch (error) {
