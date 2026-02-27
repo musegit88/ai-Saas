@@ -44,7 +44,15 @@ export async function POST(req: Request,) {
         if (!isPro) {
             await increaseApiLimit()
         }
-        return NextResponse.json(data.openai.items)
+
+        // Accessing using bracket notation because of the '/' character in the key
+        const result = data['openai/dall-e-3'];
+        console.log(result)
+        if (result && result.status === 'success') {
+            return NextResponse.json(result.items);
+        }
+
+        return new NextResponse("Failed to generate image", { status: 500 });
     } catch (error) {
         console.log("[IMAGE ERROR]", error)
     }
