@@ -10,7 +10,7 @@ export default function LandingHero() {
   return (
     <div className="text-white py-36 text-center space-y-5">
       <div className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold space-y-5">
-        <h1>Prime AI for</h1>
+        <h1>PRIME AI for</h1>
         <div className="bg-gradient-to-r from-lime-500 to-green-400 bg-clip-text text-transparent">
           <TypewriterComponent
             options={{

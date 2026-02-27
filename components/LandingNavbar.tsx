@@ -22,7 +22,7 @@ export default function landingNavbar() {
               poppins.className
             )}
           >
-            Prime AI
+            PRIME AI
           </h1>
         </div>
       </Link>
