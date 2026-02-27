@@ -12,15 +12,19 @@ export async function GET() {
         const { userId } = auth()
         const user = await currentUser()
 
+        // check if user is authenticated
         if (!userId || !user) {
             return new NextResponse("Unauthorized", { status: 401 })
         }
 
+        // check if user has subscription
         const userSubscription = await prismadb.userSubscription.findUnique({
             where: {
                 userId: userId
             }
         })
+
+        // if user has subscription, redirect to billing portal
         if (userSubscription && userSubscription.stripeCustomerId) {
             const stripeSession = await stripe.billingPortal.sessions.create({
                 customer: userSubscription.stripeCustomerId,
@@ -29,6 +33,7 @@ export async function GET() {
             return new NextResponse(JSON.stringify({ url: stripeSession.url }))
         }
 
+        // create new checkout session for new subscription
         const stripeSession = await stripe.checkout.sessions.create({
             success_url: settingsUrl,
             cancel_url: settingsUrl,
@@ -57,6 +62,7 @@ export async function GET() {
                 userId
             }
         })
+        // return url to checkout session
         return new NextResponse(JSON.stringify({ url: stripeSession.url }))
 
     } catch (error) {
