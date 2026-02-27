@@ -63,16 +63,16 @@ const amountOptions = [
 ];
 const resolutionOptions = [
   {
-    value: "256x256",
-    lable: "256x256",
-  },
-  {
-    value: "512x512",
-    lable: "512x512",
-  },
-  {
     value: "1024x1024",
     lable: "1024x1024",
+  },
+  {
+    value: "1024x1792",
+    lable: "1024x1792",
+  },
+  {
+    value: "1792x1024",
+    lable: "1792x1024",
   },
 ];
 export default function ImageGenerationPage() {
@@ -84,7 +84,7 @@ export default function ImageGenerationPage() {
     defaultValues: {
       prompt: "",
       amount: "1",
-      resolution: "256x256",
+      resolution: "1024x1024",
     },
   });
 
