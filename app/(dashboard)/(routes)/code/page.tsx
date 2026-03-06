@@ -134,20 +134,19 @@ export default function CodePage() {
                 className={cn(
                   "p-8 w-full flex items-start gap-x-8 rounded-lg",
                   message.content
-                    ? "bg-white border border-black/10"
+                    ? "bg-muted-foreground/20 border border-black/10"
                     : "bg-muted"
                 )}
               >
                 {message.content ? (
+                  <UserAvatar />
+                ) : (
                   <h6 className="bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent">
                     Prime
                   </h6>
-                ) : (
-                  <UserAvatar />
                 )}
                 <p className="text-sm">{message.content}</p>
 
-                {/* <p className="text-sm"> */}
                 <ReactMarkdown
                   components={{
                     pre: ({ node, ...props }) => (
@@ -163,7 +162,6 @@ export default function CodePage() {
                 >
                   {message.res}
                 </ReactMarkdown>
-                {/* </p> */}
               </div>
             ))}
           </div>

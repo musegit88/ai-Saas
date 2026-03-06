@@ -129,7 +129,7 @@ export default function ConversationPage() {
                 className={cn(
                   "p-8 w-full flex items-start gap-x-8 rounded-lg",
                   message.content
-                    ? "bg-white border border-black/10"
+                    ? "bg-muted-foreground/20 border border-black/10"
                     : "bg-muted"
                 )}
               >
